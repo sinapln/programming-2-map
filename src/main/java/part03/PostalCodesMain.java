@@ -44,11 +44,15 @@ public class PostalCodesMain {
         String answer = scanner.nextLine(); // answer may be a postal code or a postal district name
 
         if (postalCodes.containsKey(answer)) {
+
             System.out.println(postalCodes.get(answer));
+
         } else {
+
             TreeSet<String> matchingCodes = new TreeSet<>();
 
             for (Map.Entry<String, String> entry : postalCodes.entrySet()) {
+
                 if (entry.getValue().trim().equalsIgnoreCase(answer)) {
                     matchingCodes.add(entry.getKey());
                 }
@@ -56,7 +60,9 @@ public class PostalCodesMain {
 
             for (String code : matchingCodes) {
                 System.out.println(code);
-                }
-            } scanner.close();
-        }  
+            }
+        }
+
+        scanner.close();
     }
+}
