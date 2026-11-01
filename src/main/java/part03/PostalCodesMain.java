@@ -48,19 +48,15 @@ public class PostalCodesMain {
         } else {
             TreeSet<String> matchingCodes = new TreeSet<>();
 
-            for (String code : postalCodes.keySet()) {
-                String district = postalCodes.get(code);
-
-                if (district.equalsIgnoreCase(answer)) {
-                    matchingCodes.add(code);
+            for (Map.Entry<String, String> entry : postalCodes.entrySet()) {
+                if (entry.getValue().trim().equalsIgnoreCase(answer)) {
+                    matchingCodes.add(entry.getKey());
                 }
             }
 
             for (String code : matchingCodes) {
                 System.out.println(code);
-            }
-        }
-
-        scanner.close();
+                }
+            } scanner.close();
+        }  
     }
-}
