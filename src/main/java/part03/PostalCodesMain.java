@@ -2,6 +2,7 @@ package part03;
 
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 /**
  * This part of the exercise is tested manually through the user interface, not
@@ -42,7 +43,23 @@ public class PostalCodesMain {
         System.out.print("Input postal code or district (e.g., 00100 or Helsinki): ");
         String answer = scanner.nextLine(); // answer may be a postal code or a postal district name
 
-        // TODO: Implement your logic here
+        if (postalCodes.containsKey(answer)) {
+            System.out.println(postalCodes.get(answer));
+        } else {
+            TreeSet<String> matchingCodes = new TreeSet<>();
+
+            for (String code : postalCodes.keySet()) {
+                String district = postalCodes.get(code);
+
+                if (district.equalsIgnoreCase(answer)) {
+                    matchingCodes.add(code);
+                }
+            }
+
+            for (String code : matchingCodes) {
+                System.out.println(code);
+            }
+        }
 
         scanner.close();
     }

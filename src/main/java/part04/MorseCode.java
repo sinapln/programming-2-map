@@ -1,5 +1,8 @@
 package part04;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This is an extra class, which is not included in the grading of the
  * assignment. Feel free to complete this class or skip it entirely. If you
@@ -40,7 +43,29 @@ public class MorseCode {
      * @return the translated text (in lower case)
      */
     public String morseToText(String morse) {
-        return null;
+        Map<String, Character> codes = createMorseMap();
+
+        StringBuilder result = new StringBuilder();
+
+        String[] words = morse.trim().split(" {3}");
+
+        for (String word : words) {
+            String[] letters = word.split(" ");
+
+            for (String letter : letters) {
+                if (codes.containsKey(letter)) {
+                    result.append(codes.get(letter));
+                }
+            }
+
+            result.append(" ");
+        }
+
+        if (result.length() > 0) {
+            result.setLength(result.length() - 1);
+        }
+
+        return result.toString();
     }
 
     /**
@@ -58,6 +83,90 @@ public class MorseCode {
      * @return the translated morse code as a single string
      */
     public String textToMorse(String text) {
-        return null;
+        Map<Character, String> codes = createTextMap();
+
+        StringBuilder result = new StringBuilder();
+
+        String[] words = text.toLowerCase().split(" ");
+
+        for (int i = 0; i < words.length; i++) {
+            StringBuilder morseWord = new StringBuilder();
+
+            for (int j = 0; j < words[i].length(); j++) {
+                char letter = words[i].charAt(j);
+
+                if (codes.containsKey(letter)) {
+                    if (morseWord.length() > 0) {
+                        morseWord.append(" ");
+                    }
+
+                    morseWord.append(codes.get(letter));
+                }
+            }
+
+            if (morseWord.length() > 0) {
+                if (result.length() > 0) {
+                    result.append("   ");
+                }
+
+                result.append(morseWord);
+            }
+        }
+
+        return result.toString();
+    }
+
+    private Map<Character, String> createTextMap() {
+        Map<Character, String> map = new HashMap<>();
+
+        map.put('a', ".-");
+        map.put('b', "-...");
+        map.put('c', "-.-.");
+        map.put('d', "-..");
+        map.put('e', ".");
+        map.put('f', "..-.");
+        map.put('g', "--.");
+        map.put('h', "....");
+        map.put('i', "..");
+        map.put('j', ".---");
+        map.put('k', "-.-");
+        map.put('l', ".-..");
+        map.put('m', "--");
+        map.put('n', "-.");
+        map.put('o', "---");
+        map.put('p', ".--.");
+        map.put('q', "--.-");
+        map.put('r', ".-.");
+        map.put('s', "...");
+        map.put('t', "-");
+        map.put('u', "..-");
+        map.put('v', "...-");
+        map.put('w', ".--");
+        map.put('x', "-..-");
+        map.put('y', "-.--");
+        map.put('z', "--..");
+
+        map.put('0', "-----");
+        map.put('1', ".----");
+        map.put('2', "..---");
+        map.put('3', "...--");
+        map.put('4', "....-");
+        map.put('5', ".....");
+        map.put('6', "-....");
+        map.put('7', "--...");
+        map.put('8', "---..");
+        map.put('9', "----.");
+
+        return map;
+    }
+
+    private Map<String, Character> createMorseMap() {
+        Map<String, Character> map = new HashMap<>();
+
+        for (Map.Entry<Character, String> entry : createTextMap().entrySet()) {
+            map.put(entry.getValue(), entry.getKey());
+        }
+
+        return map;
     }
 }
