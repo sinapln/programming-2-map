@@ -58,9 +58,7 @@ public class PostalCodesMain {
                 }
             }
 
-            for (String code : matchingCodes) {
-                System.out.println(code);
-            }
+            System.out.println(String.join(" ", matchingCodes));
         }
 
         scanner.close();
